@@ -147,15 +147,23 @@ class ForexLiveBot:
             title = article['Topic']
             html_content = article['Body']
             content = self.html_to_telegraph_json(html_content)
-            print(content)
+            # print(content)
 
             translated_title = c.translate_text(title)
             translated_title = re.sub(
                 'ForexLive', '', translated_title)
-            print(article['FeaturedImage']['URL'])
+
+            featured_image_url = None
+            if article.get('FeaturedImage') and article['FeaturedImage'].get('URL'):
+                featured_image_url = article['FeaturedImage']['URL']
+                print(featured_image_url)
+
             web_url = iv.createPage(
-                "John Trần", access_token, translated_title, content, auth_url, featured_image_url=article['FeaturedImage']['URL'])
+                "John Trần", access_token, translated_title, content, auth_url, featured_image_url=featured_image_url
+            )
             self.bot.sendMessageHasUrl(
-                self.group_id, translated_title, random.choice(self.intros), web_url)
+                self.group_id, translated_title, random.choice(
+                    self.intros), web_url
+            )
 
             self.save_url(title, article['ArticleId'])
