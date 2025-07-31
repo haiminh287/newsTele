@@ -26,17 +26,17 @@ intros = ['Quý vị cần tư vấn chuyên nghiệp và tận tâm về giao d
           'Quý vị muốn tăng cường kiến thức và kỹ năng ngoại hối? Hãy yêu cầu tư vấn.',
           'Quý vị muốn thành công trong giao dịch ngoại hối? Hãy yêu cầu tư vấn.'
           ]
+# BOT_LUX = TelegramBot(
+#     "7554041257:AAFUAwMCoYs4491t6vDocZ1W9qBvbvjVzto", "BOT_LUX", "https://t.me/TNH9898")
 BOT_LUX = TelegramBot(
-    "7554041257:AAFUAwMCoYs4491t6vDocZ1W9qBvbvjVzto", "BOT_LUX", "https://t.me/TNH9898")
-BOT_LUX = TelegramBot(
-    "6866400621:AAFUt7yBvStoq2GxtBZYmXYBZonMI5bMyUc", "HM_LO_BOT", "https://t.me/applehm")
+    "6866400621:AAFUt7yBvStoq2GxtBZYmXYBZonMI5bMyUc", "HM_LO_BOT", "https://t.me/John_FinMMO")
 FX_BOT = FXStreetBot(
     api_id=18353013,
     api_hash="e39976efc4e58975354ca48914a2c48e",
     group_id='-1002007128570',
     bot=BOT_LUX,
     users=[{
-        'Admin': 'https://t.me/TNH9898'
+        'Admin': 'https://t.me/John_FinMMO'
     }],
     intros=intros
 )

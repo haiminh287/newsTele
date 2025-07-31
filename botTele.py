@@ -54,14 +54,13 @@ class TelegramBot:
 
     def sendMessage(self, group_id, text, url_web=None):
         telegram_url = f'{self.url}/sendMessage'
-        # reply_markup = {"inline_keyboard": [
-        #     [{"text": f"💬 Liên Hệ Admin Để Biết Chi Tiết 🔮🔮🔮!!!", "url": self.admin}]]}
+        reply_markup = {"inline_keyboard": [
+            [{"text": f"Nhắn John Trần Giải Thích !!!", "url": self.admin}]]}
         if (url_web):
             text = '<a href="{}"><b>{}</b></a>'.format(url_web, text.title())
         # textNew = '<i>{}</i> '.format(textNew)
         data = {'text': text, 'chat_id': group_id,
-                #   'parse_mode': 'HTML', 'reply_markup': json.dumps(reply_markup)}
-                'parse_mode': 'HTML'}
+                'parse_mode': 'HTML', 'reply_markup': json.dumps(reply_markup)}
         response = requests.post(telegram_url, json=data)
 
         if response.status_code == 200:
@@ -72,13 +71,13 @@ class TelegramBot:
 
     def sendMessageHasUrl(self, group_id, title, intro, url_web, **kwargs):
         telegram_url = f'{self.url}/sendMessage'
-        # reply_markup = {"inline_keyboard": [
-        #     [{"text": f"Yêu Cầu {name} Tư Vấn Ngay !!!", "url": url}]]}
+        reply_markup = {"inline_keyboard": [
+            [{"text": f"Nhắn John Trần Giải Thích !!!", "url": self.admin}]]}
         intro = '💬 <i>{}</i> 🔮🔮🔮'.format(intro)
         title = '<a href="{}"><b>{}</b></a>'.format(url_web, title.title())
         data = {'chat_id': group_id, 'text': title+'\n\n' + intro,
-                # 'parse_mode': 'HTML', 'reply_markup': json.dumps(reply_markup)}
-                'parse_mode': 'HTML'}
+                'parse_mode': 'HTML', 'reply_markup': json.dumps(reply_markup)}
+        # 'parse_mode': 'HTML'}
         response = requests.post(telegram_url, json=data)
         if response.status_code == 200:
             print("Message sent successfully.")
