@@ -31,7 +31,16 @@ def revokeAccessToken(access_token):
         print(response.json())
 
 
-def createPage(nameAuthor, access_token, title, content, author_url, return_content=True):
+def createPage(nameAuthor, access_token, title, content, author_url, featured_image_url=None, return_content=True):
+    if featured_image_url:
+        print("Adding featured image to content.", featured_image_url)
+        content.insert(0, {
+            "tag": "img",
+            "attrs": {
+                "src": featured_image_url,
+                "alt": "Featured Image"
+            }
+        })
     url = "https://api.telegra.ph/createPage"
     author_name = nameAuthor
     data = {
@@ -42,10 +51,13 @@ def createPage(nameAuthor, access_token, title, content, author_url, return_cont
         "content": content,
         "return_content": return_content
     }
+    print("Page created successfully.")
     response = requests.post(url, json=data)
+
     if response.status_code == 200:
         return response.json()["result"]["url"]
     else:
+
         revoke = revokeAccessToken(access_token)
         access_token = revoke[0]
         author_url = revoke[1]

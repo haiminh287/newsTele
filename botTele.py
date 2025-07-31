@@ -70,6 +70,22 @@ class TelegramBot:
             print("Failed to send message. Status code:", response.status_code)
             print(response.text)
 
+    def sendMessageHasUrl(self, group_id, title, intro, url_web, **kwargs):
+        telegram_url = f'{self.url}/sendMessage'
+        # reply_markup = {"inline_keyboard": [
+        #     [{"text": f"Yêu Cầu {name} Tư Vấn Ngay !!!", "url": url}]]}
+        intro = '💬 <i>{}</i> 🔮🔮🔮'.format(intro)
+        title = '<a href="{}"><b>{}</b></a>'.format(url_web, title.title())
+        data = {'chat_id': group_id, 'text': title+'\n\n' + intro,
+                # 'parse_mode': 'HTML', 'reply_markup': json.dumps(reply_markup)}
+                'parse_mode': 'HTML'}
+        response = requests.post(telegram_url, json=data)
+        if response.status_code == 200:
+            print("Message sent successfully.")
+        else:
+            print("Failed to send message. Status code:", response.status_code)
+            print(response.text)
+
     def sendFileGroup(self, group_id, file_path, file_url):
         telegram_url = f'{self.url}/sendDocument'
         reply_markup = {"inline_keyboard": [

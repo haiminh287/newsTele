@@ -4,6 +4,7 @@ import time
 import re
 import json
 from telethon.sync import TelegramClient
+from utils import read_and_write
 
 
 def get_user_groups(api_id, api_hash):
@@ -96,21 +97,11 @@ def get_content():
     return arrs
 
 
-def read_and_write(filename, data) -> bool:
-    with open(file=filename, mode='a+', encoding='utf-8') as f:
-        f.seek(0)
-        datas = f.read()
-        if data not in datas:
-            f.write(data + '\n')
-            return True
-        return False
-
-
 def changeText(text):
     parts = text.split("\n\n", 1)
     title = parts[0]
     content = parts[1]
-    return f'<b>{title}</b>' + '\n\n' + content+'\n\n'+'#LuxNews #Forex'
+    return f'<b>{title}</b>' + '\n\n' + content+'\n\n'+'#Forex'
 
 
 def bot_send_client(BOT_LUX, group_id):
