@@ -104,7 +104,7 @@ def changeText(text):
     return f'<b>{title}</b>' + '\n\n' + content+'\n\n'+'#Forex'
 
 
-def bot_send_client(BOT_LUX, group_id):
+def bot_send_client(bots, group_ids):
     api_idAnna = 18353013
     api_hashAnna = "e39976efc4e58975354ca48914a2c48e"
     channel_messages = get_channel_messages(
@@ -114,5 +114,7 @@ def bot_send_client(BOT_LUX, group_id):
             if (read_and_write("client.txt", message.message)) and "The S" not in message.message:
                 translateText = c.translate_text(message.message)
                 translateText = changeText(translateText)
-                BOT_LUX.sendMessage(
-                    group_id, translateText)
+                bots[0].sendMessage(
+                    group_ids[0], translateText)
+                bots[1].sendMessage(
+                    group_ids[1], translateText, topic_id=4294999733)

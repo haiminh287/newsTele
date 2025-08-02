@@ -14,11 +14,11 @@ import instantview as iv
 
 
 class FXStreetBot:
-    def __init__(self, api_id, api_hash, bot, group_id, users, intros):
+    def __init__(self, api_id, api_hash, bots, group_ids, users, intros):
         self.api_id = api_id
         self.api_hash = api_hash
-        self.bot = bot
-        self.group_id = group_id
+        self.bots = bots
+        self.group_ids = group_ids
         self.users = users
         self.intros = intros
 
@@ -112,8 +112,11 @@ class FXStreetBot:
                 # user_url = list(self.users[index_user].values())[0]
                 page_url = iv.createPage(
                     "John Trần", access_token, title, content, auth_url)
-                self.bot.sendMessageHasUrl(
-                    self.group_id, title, self.intros[index_intro], page_url
+                self.bots[0].sendMessageHasUrl(
+                    self.group_ids[0], title, self.intros[index_intro], page_url
+                )
+                self.bots[1].sendMessageHasUrl(
+                    self.group_ids[1], title, self.intros[index_intro], page_url, topic_id=4294999733
                 )
                 self.save_message(msg.message, url)
                 index_user = (index_user + 1) % len(self.users)

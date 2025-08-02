@@ -52,15 +52,18 @@ class TelegramBot:
             print("Failed to send photo. Status code:", response.status_code)
             print(response.text)
 
-    def sendMessage(self, group_id, text, url_web=None):
+    def sendMessage(self, group_id, text, url_web=None, **kwargs):
         telegram_url = f'{self.url}/sendMessage'
         reply_markup = {"inline_keyboard": [
             [{"text": f"Nhắn John Trần Giải Thích !!!", "url": self.admin}]]}
         if (url_web):
             text = '<a href="{}"><b>{}</b></a>'.format(url_web, text.title())
+
         # textNew = '<i>{}</i> '.format(textNew)
         data = {'text': text, 'chat_id': group_id,
                 'parse_mode': 'HTML', 'reply_markup': json.dumps(reply_markup)}
+        if 'topic_id' in kwargs:
+            data['message_thread_id'] = kwargs['topic_id']
         response = requests.post(telegram_url, json=data)
 
         if response.status_code == 200:
@@ -78,6 +81,8 @@ class TelegramBot:
         data = {'chat_id': group_id, 'text': title+'\n\n' + intro,
                 'parse_mode': 'HTML', 'reply_markup': json.dumps(reply_markup)}
         # 'parse_mode': 'HTML'}
+        if 'topic_id' in kwargs:
+            data['message_thread_id'] = kwargs['topic_id']
         response = requests.post(telegram_url, json=data)
         if response.status_code == 200:
             print("Message sent successfully.")

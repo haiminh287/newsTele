@@ -30,11 +30,13 @@ intros = ['Quý vị cần tư vấn chuyên nghiệp và tận tâm về giao d
 #     "7554041257:AAFUAwMCoYs4491t6vDocZ1W9qBvbvjVzto", "BOT_LUX", "https://t.me/TNH9898")
 BOT_LUX = TelegramBot(
     "6866400621:AAFUt7yBvStoq2GxtBZYmXYBZonMI5bMyUc", "HM_LO_BOT", "https://t.me/John_FinMMO")
+BOT_JOHN = TelegramBot(
+    "8199658196:AAFM5yWUYqSDB8XVxWL1sUWvjArtYNx56wI", "BOT JOHN", "https://t.me/John_FinMMO")
 FX_BOT = FXStreetBot(
     api_id=18353013,
     api_hash="e39976efc4e58975354ca48914a2c48e",
-    group_id='-1002007128570',
-    bot=BOT_LUX,
+    group_ids=['-1002007128570', '-1002196411332'],
+    bots=[BOT_LUX, BOT_JOHN],
     users=[{
         'Admin': 'https://t.me/John_FinMMO'
     }],
@@ -43,8 +45,8 @@ FX_BOT = FXStreetBot(
 FL_BOT = ForexLiveBot(
     api_id=18353013,
     api_hash="e39976efc4e58975354ca48914a2c48e",
-    bot=BOT_LUX,
-    group_id='-1002007128570',
+    bots=[BOT_LUX, BOT_JOHN],
+    group_ids=['-1002007128570', '-1002196411332'],
     users=[],
     intros=intros)
 if __name__ == "__main__":
@@ -52,7 +54,8 @@ if __name__ == "__main__":
         try:
             # tv.Scrap_community_idea(BOT_LUX=BOT_LUX, group_id='-1002406206404')
             # time.sleep(30)
-            c.bot_send_client(BOT_LUX=BOT_LUX, group_id=-1002007128570)
+            c.bot_send_client(bots=[BOT_LUX, BOT_JOHN],
+                              group_ids=[-1002007128570, -1002196411332])
             time.sleep(5)
             FX_BOT.run(-1001510625232)
             time.sleep(5)

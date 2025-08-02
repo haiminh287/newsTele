@@ -11,11 +11,11 @@ import random
 
 
 class ForexLiveBot:
-    def __init__(self, api_id, api_hash, bot, group_id, users, intros):
+    def __init__(self, api_id, api_hash, bots, group_ids, users, intros):
         self.api_id = api_id
         self.api_hash = api_hash
-        self.bot = bot
-        self.group_id = group_id
+        self.bots = bots
+        self.group_ids = group_ids
         self.users = users
         self.intros = intros
         self.old_messages_file = "messageForexLive.json"
@@ -161,9 +161,13 @@ class ForexLiveBot:
             web_url = iv.createPage(
                 "John Trần", access_token, translated_title, content, auth_url, featured_image_url=featured_image_url
             )
-            self.bot.sendMessageHasUrl(
-                self.group_id, translated_title, random.choice(
+            self.bots[0].sendMessageHasUrl(
+                self.group_ids[0], translated_title, random.choice(
                     self.intros), web_url
+            )
+            self.bots[1].sendMessageHasUrl(
+                self.group_ids[1], translated_title, random.choice(
+                    self.intros), web_url, topic_id=4294999733
             )
 
             self.save_url(title, article['ArticleId'])
